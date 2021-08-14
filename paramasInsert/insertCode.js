@@ -35,8 +35,9 @@ const insertParamToConsole = (path) => {
     path.node.arguments.unshift(types.stringLiteral(`filename: (${line}, ${column})`));
   }
 };
-// 在上一行插入
+// 在上一行
 const insertCodeBeforeConsole = (path) => {
+  console.log(path.scope.bindings);
   // 用isNew判断是否是新节点,是的话就跳过这次遍历
   if (path.node.isNew) {
     return;
@@ -69,4 +70,4 @@ traverse(ast, {
 });
 
 const { code, map } = generate(ast);
-console.log(code);
+// console.log(code);
